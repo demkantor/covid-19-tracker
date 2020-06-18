@@ -9,14 +9,21 @@ import { fetchData } from './api';
 class App extends Component {
 
   state = {
-    data: {}
+    data: {},
+    country: ''
   };
 
   componentDidMount = async () => {
     const data = await fetchData();
 
     this.setState({ data });
-  }
+  };
+
+  // get selected country from user input in Country component
+  handleCountryChange = async (country) => {
+    console.log(country);
+  };
+
   render() {
     const { data } = this.state;
 
