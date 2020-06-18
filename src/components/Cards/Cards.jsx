@@ -6,7 +6,8 @@ import styles from './Cards.module.css';
 import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 
 const Cards = ({ data: {confirmed, recovered, deaths, lastUpdate} }) => {
-    if(!confirmed || !recovered) {
+    
+    if(!confirmed) {
         return 'Loading...';
     }
 
