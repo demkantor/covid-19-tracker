@@ -14,24 +14,28 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    const data = await fetchData();
-
-    this.setState({ data });
+    this.updateState();
   };
 
   // get selected country from user input in Country component
   handleCountryChange = async (country) => {
-    console.log(country);
+    this.updateState(country);
+  };
+
+  updateState = async (country) => {
+    const data = await fetchData(country);
+    this.setState({ data, country });
   };
 
   render() {
-    const { data } = this.state;
+    const { data, country } = this.state;
 
     return (
       <div className={styles.container}>
+        <img className={styles.image} src="StopTheSpread.png" alt="StopTheSpread" />
         <Cards data={data} />
-        <Country />
-        <Chart />
+        <Country handleCountryChange={this.handleCountryChange} />
+        <Chart data={data} country={country} />
       </div>
     )
   }

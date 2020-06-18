@@ -2,10 +2,19 @@ import axios from 'axios';
 
 const url = 'https://covid19.mathdro.id/api';
 
-// fetch main dataset from api
-export const fetchData = async () => {
+// fetch main dataset from api, if country given as argument change URL to get that data
+export const fetchData = async (country) => {
+
+    let dynamicURL = url
+
+    if(country) {
+        dynamicURL = `${url}/countries/${country}`
+    };
+
+    // console.log(dynamicURL);
+
     try {
-        const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(url);
+        const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(dynamicURL);
         // console.log(confirmed, recovered, deaths, lastUpdate);
 
         return { confirmed, recovered, deaths, lastUpdate };
